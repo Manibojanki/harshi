@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+
+:root {
+  --color-bg: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-accent-start: #db2777;
+  --color-accent-end: #9333ea;
+  --border-radius: 0.75rem;
+  --shadow-light: 0 6px 18px rgba(0, 0, 0, 0.07);
+  --shadow-glow: 0 0 20px 2px rgba(219, 39, 119, 0.3);
+  --animation-duration: 1.2s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 5rem 1rem 7rem;
+}
+
+main.container {
+  max-width: 900px;
+  background: var(--color-bg);
+  border-radius: var(--border-radius);
+  box-shadow:
+    var(--shadow-light),
+    var(--shadow-glow);
+  padding: 4rem 5rem;
+  text-align: left;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+main.container:hover,
+main.container:focus-within {
+  transform: scale(1.03);
+  box-shadow:
+    0 12px 30px rgba(219, 39, 119, 0.45),
+    0 0 40px 8px rgba(219, 39, 119, 0.4);
+}
+
+/* Gradient text animation for heading */
+h1 {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.1;
+  margin: 0 0 1.25rem 0;
+  background: linear-gradient(90deg, var(--color-accent-start), var(--color-accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientSlide 5s ease infinite;
+  user-select: none;
+}
+
+/* Subtitle with animated glowing underline */
+.subtitle {
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--color-accent-start);
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 0.35rem;
+  user-select: none;
+}
+.subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(270deg, var(--color-accent-end), var(--color-accent-start));
+  border-radius: 1.5px;
+  animation: waveGlow 3.5s linear infinite;
+}
+
+/* Letter paragraphs */
+p {
+  margin-top: 0;
+  margin-bottom: 1.75rem;
+  color: var(--color-text-primary);
+  opacity: 0;
+  transform: translateY(25px);
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  animation-name: fadeSlideUp;
+  animation-duration: var(--animation-duration);
+  animation-delay: 0.3s;
+}
+
+/* Stagger paragraphs with delay */
+p:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+p:nth-of-type(2) {
+  animation-delay: 0.55s;
+}
+p:nth-of-type(3) {
+  animation-delay: 0.8s;
+}
+p:nth-of-type(4) {
+  animation-delay: 1.05s;
+}
+p:nth-of-type(5) {
+  animation-delay: 1.3s;
+}
+
+/* Closing paragraph */
+p.closing {
+  margin-top: 3rem;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--color-accent-end);
+  animation-delay: 1.55s;
+}
+
+/* Animations */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientSlide {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes waveGlow {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.4;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 680px) {
+  main.container {
+    padding: 3rem 2.5rem;
+    max-width: 95vw;
+  }
+  h1 {
+    font-size: 42px;
+    line-height: 1.15;
+  }
+  .subtitle,
+  p.closing {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 3rem 0.7rem 5rem;
+  }
+  h1 {
+    font-size: 34px;
+  }
+  .subtitle,
+  p.closing {
+    font-size: 18px;
+  }
+}
